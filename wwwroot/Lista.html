@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Datos de empleados</title>
+
+    <!-- Bootstrap -->
+    <!--<link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style_nav.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>
+        .content {
+            margin-top: 80px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand visible-xs-block visible-sm-block" href="">Inicio</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav ">
+                <li class="active"><a href="index.php">Lista de empleados</a></li>
+                <li><a href="add.php">Agregar datos</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="content">
+            <h2>Lista de nombres</h2>
+            <hr />
+
+            <br />
+            <div ng-app="myApp" ng-controller="customersCtrl" class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Estado</th>
+                    </tr>
+                    <!--<tr>
+                        <td>'.$row['codigo'].'</td>
+                        <td><a href="profile.php?nik='.$row['codigo'].'"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> '.$row['nombres'].'</a></td>
+                        <td>
+                            ';
+                            if($row['estado'] == '1'){
+                            echo '<span class="label label-success">Fijo</span>';
+                            }
+                            else if ($row['estado'] == '2' ){
+                            echo '<span class="label label-info">Contratado</span>';
+                            }
+                            else if ($row['estado'] == '3' ){
+                            echo '<span class="label label-warning">Outsourcing</span>';
+                            }
+                            echo '
+                        </td>
+                        <td>
+
+                            <a href="edit.php?nik='.$row['codigo'].'" title="Editar datos" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                            <a href="index.php?aksi=delete&nik='.$row['codigo'].'" title="Eliminar" onclick="return confirm(\'Esta seguro de borrar los datos '.$row['nombres'].'?\')" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                        </td>
+                    </tr>-->
+                    <tr ng-repeat="x in names">
+                        <td>{{ x.id }}</td>
+                        <td>{{ x.name }}</td>
+                        <td>{{ x.iscomplete }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div><center>
+        <p></p>
+    </center>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('customersCtrl', function ($scope, $http) {
+            $http.get("todoitems")
+                //$http.get("https://www.w3schools.com/angular/customers.php")
+                .then(function (response) { $scope.names = response.data; });
+        });
+    </script>
+
+</body>
+</html>
